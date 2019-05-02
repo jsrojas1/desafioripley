@@ -22,7 +22,7 @@ app.get('/', (req,res,next) =>
     res.sendFile(__dirname + './index.html')
 );
 
-let interval;
+let interval = [];
 
 io.on('connection', socket => {
     socket.emit('hello', {message: 'hello from server'})
@@ -31,12 +31,14 @@ io.on('connection', socket => {
       }
     socket.on('setCityName', (city) => {
         console.log('client is subscribing to weather with city ', city);
-        interval +=  setInterval(() => {
+        a =  setInterval(() => {
         PrepareApiCall(socket, city)
       }, 10000);
+       interval.push(a);
       });
-      socket.on('disconnect', function () {
+    socket.on('disconnect', function () {
         console.log("client is disconnecting and interval clearing");
+        console.log(interval);
         clearInterval(interval);
     });
 });
