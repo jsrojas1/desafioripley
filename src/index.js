@@ -5,14 +5,14 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import io from 'socket.io-client';
 
-const socket = io();
-socket.on('hello', ({message}) =>
-    alert(message)
-);
+//const socket = io();
+//socket.on('hello', ({message}) =>
+  //  alert(message)
+//);
 
 
 ReactDOM.render(<App />, document.getElementById('root'));
-//serviceWorker.register();
+
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
