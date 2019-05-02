@@ -6,7 +6,7 @@ var coords = {
     London: {lat: 51.5074, long: 0.1278},
     Georgia: {lat: 32.1656, long: -83.1137}
 }
-const apiKey = "1888117cdd65e6f3d020d407a9dbc9bf";
+const apiKey = "7ddb8876fbe074cd370f4c4ebc0bb719";
 
 const path = require('path');
 const express = require('express');
@@ -36,14 +36,13 @@ io.on('connection', socket => {
       }, 10000);
        interval.push(a);
       });
+    //Limpiar los intervalos al cerrar el cliente
     socket.on('disconnect', function () {
         console.log("client is disconnecting and interval clearing");
-        console.log(interval);
         for (i = 0; i < interval.length; ++i) {
             console.log(interval[i]);
             clearInterval(interval[i]);
         }
-        //clearInterval(interval);
     });
 });
 
