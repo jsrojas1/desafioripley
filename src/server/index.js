@@ -11,8 +11,11 @@ app.get('/', (req,res,next) =>
     res.sendFile(__dirname + './index.html')
 );
 
-io.on('connection', socket =>
+io.on('connection', socket => {
     socket.emit('hello', {message: 'hello from server'})
-);
+    socket.on('setCityName', (city) => {
+        socket.emit('hello', {message: 'ciudad seteada' + city})
+      });
+});
 
 server.listen(port);
