@@ -84,3 +84,41 @@ const PrepareApiCall = async (socket, city) => {
     }
     
 }
+
+//Redis
+var redis = require('redis');
+var redisclient = redis.createClient(); 
+
+//Guardar las coordenadas en Redis al iniciar
+redisclient.on('connect', function() {
+    console.log('Redis client connected');
+
+    StoreCoords("Santiago");
+    StoreCoords("Zurich");
+    StoreCoords("Auckland");
+    StoreCoords("Sydney");
+    StoreCoords("London");
+    StoreCoords("Georgia");
+});
+
+redisclient.on('error', function (err) {
+    console.log('Something went wrong ' + err);
+})
+
+function StoreCoords(key){
+
+    redisclient.exists(key,function(err,reply) {
+        if(!err) {
+         if(reply === 1) {
+          console.log("Key exists");
+        
+         } else {
+
+            console.log(coords[key]);
+            redisclient.hmset(key, "lat", coords[key].lat, "long", coords[key].long, redis.print);
+         }
+        }
+    });
+
+
+}
