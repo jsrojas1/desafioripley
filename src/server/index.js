@@ -38,14 +38,12 @@ const PrepareApiCall = async (socket, city) => {
     try {
   
       //Consultar en redis por las coordenadas de la ciudad y hacer llamado a la api
-     // await redisclient.hgetall(city, function(err,reply) {
-        //  console.log(err);
-        //  console.log(reply);
-        //  console.log(reply.lat);
-        //  lat = reply.lat;
-        //  long = reply.long.toString();
-          lat = coords[city].lat;
-          long = coords[city].long;
+      await redisclient.hgetall(city, function(err,reply) {
+          console.log(err);
+          console.log(reply);
+          console.log(reply.lat);
+          lat = reply.lat;
+          long = reply.long.toString();
           console.log("lat es: " + lat);
           console.log("long es: " + long);
   
@@ -53,7 +51,7 @@ const PrepareApiCall = async (socket, city) => {
   
           CallApiAndEmit(url, socket);
           
-      //});
+      });
       
     } catch (error) {
       console.error(`Error: ${error.code}`);
@@ -73,13 +71,13 @@ const PrepareApiCall = async (socket, city) => {
         socket.emit("FromAPI", {timezone: res.data.timezone, temp: res.data.currently.temperature, time: res.data.currently.time});
 
     } catch(error){
-       /* redisclient.hmset('api.errors', Date.now(), error.toString(), (err, reply) => {
+        redisclient.hmset('api.errors', Date.now(), error.toString(), (err, reply) => {
             if(err) {
               console.error(err);
             } else {
               console.log(reply);
             }
-          });*/
+          });
 
     }
     
