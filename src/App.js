@@ -25,11 +25,6 @@ class Weather extends Component {
     );
     socket.on("FromAPI", data => this.setState({ response: true, timezone: data.timezone, time: new Date(data.time*1000).toLocaleString("en-US", {timeZone: data.timezone}), temp: data.temp }));
     socket.emit('setCityName', this.props.value);
-
-    //const socket = io();
-    socket.on('hello', ({message}) =>
-    alert(message)
-    );
     
   }
   render() {
