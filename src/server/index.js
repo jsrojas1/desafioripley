@@ -22,11 +22,16 @@ app.get('/', (req,res,next) =>
     res.sendFile(__dirname + './index.html')
 );
 
+let interval;
+
 io.on('connection', socket => {
     socket.emit('hello', {message: 'hello from server'})
+    if (interval) {
+        clearInterval(interval);
+      }
     socket.on('setCityName', (city) => {
         console.log('client is subscribing to weather with city ', city);
-        setInterval(() => {
+        interval =  setInterval(() => {
         PrepareApiCall(socket, city)
       }, 10000);
       });
