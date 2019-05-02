@@ -87,7 +87,7 @@ const PrepareApiCall = async (socket, city) => {
 
 //Redis
 var redis = require('redis');
-var redisclient = redis.createClient().createClient(process.env.REDIS_URL); 
+var redisclient = redis.createClient(process.env.REDIS_URL); 
 
 //Guardar las coordenadas en Redis al iniciar
 redisclient.on('connect', function() {
