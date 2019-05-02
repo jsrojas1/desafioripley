@@ -35,6 +35,9 @@ io.on('connection', socket => {
         PrepareApiCall(socket, city)
       }, 10000);
       });
+      socket.on('disconnect', function () {
+        clearInterval(interval);
+    });
 });
 
 server.listen(port);
