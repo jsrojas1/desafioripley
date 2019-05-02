@@ -31,7 +31,7 @@ io.on('connection', socket => {
       }
     socket.on('setCityName', (city) => {
         console.log('client is subscribing to weather with city ', city);
-        interval =  setInterval(() => {
+        interval +=  setInterval(() => {
         PrepareApiCall(socket, city)
       }, 10000);
       });
