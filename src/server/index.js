@@ -36,6 +36,7 @@ io.on('connection', socket => {
       }, 10000);
       });
       socket.on('disconnect', function () {
+        console.log("client is disconnecting and interval clearing");
         clearInterval(interval);
     });
 });
