@@ -7,7 +7,7 @@ class Weather extends Component {
     super();
     this.state = {
       response: false,
-      endpoint: "http://127.0.0.1:8081",
+      endpoint: "http://localhost:8080",
       city: '',
       timezone: '',
       time: '',
